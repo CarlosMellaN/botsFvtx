@@ -134,8 +134,8 @@ const scraperObject = {
             await page.$eval('#gwt-uid-42', el => el.click(),{delay: 1000});
             const [seleccionarLink] = await page.$x("//span[contains(., 'Seleccionar')]");
             seleccionarLink.click();
-            await page.waitForTimeout(35000)
             console.log('wait for link download 35 seconds')
+            await page.waitForTimeout(35000)
             await page.waitForSelector('.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle',{delay:20000});
             await page.$eval('div.v-horizontallayout.v-layout.v-horizontal.v-widget > div.v-slot > div.v-link.v-widget > a', el => el.click(),{delay: 1000});
             await page._client.send("Page.setDownloadBehavior", {
@@ -202,8 +202,8 @@ const scraperObject = {
                     await page.$eval('#gwt-uid-42', el => el.click(),{delay: 1000});
                     const [seleccionarLink] = await page.$x("//span[contains(., 'Seleccionar')]");
                     seleccionarLink.click();
-                    await page.waitForTimeout(35000)
                     console.log('wait for link download 35 seconds')
+                    await page.waitForTimeout(35000)
                     await page.waitForSelector('.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle',{delay:20000});
                     await page.$eval('div.v-horizontallayout.v-layout.v-horizontal.v-widget > div.v-slot > div.v-link.v-widget > a', el => el.click(),{delay: 1000});
                     await page._client.send("Page.setDownloadBehavior", {
@@ -224,6 +224,12 @@ const scraperObject = {
                 }
             }
         }
+        folder.readdir(dirEnterprise, (err, files) => {
+            files.forEach(file => {
+                console.log(file);
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/abcdin.xls')
+            });
+        });
     }
 }
 module.exports = scraperObject;

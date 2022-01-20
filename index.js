@@ -16,20 +16,26 @@ const getProductsFavatex = require('./favatexCom/productFavatexWeb')
 const getAccessToken = require('./mercadolibre/apiML')
 const saveProductsFavatex = require('./favatexCom/insertProductsDB')
 
+const http = require('http');
+const url = require('url');
+const opn = require('open');
+const destroyer = require('server-destroy');
+
+const {google} = require('googleapis');
+const people = google.people('v1');
+
 
 // Wrapping the Puppeteer browser logic in a GET request
-/*app.get('/easy', function(req, res) {
-    res.send(`<html><body><h2>Descargando archivo Easy</h2></body></html>`)
+app.get('/paris', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Paris</h2></body></html>`)
     let browserInstance = browserObject.startBrowser();
-    scraperControllerEasy(browserInstance)
+    scraperControllerParis(browserInstance)
 });
 // Making Express listen on port 3000
-app.listen(3000, function() {
-    console.log('Running on port 3000.');
-});*/
-const urlGetAccessToken = 'https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/'
-const client_id = '8231588529441057'
-const client_secret= 'o97kurod4Jc6vd6zqZH9m52rIzAyi2VJ'
+
+const urlGetAccessToken = process.env.URL_GET_ACCESS_TOKEN
+const client_id = process.env.CLIENT_ID
+const client_secret= process.env.CLIENT_SECRET
 const redirectUrl = 'https://www.favatex.com/'
 /*app.get('/mercadolibre', function (req,res) {
     var authCallback = GetBaseUrl() + '/auth/mercadolibre/callback';
@@ -103,7 +109,7 @@ const callBots = async() =>{
         scraperControllerParis(browserInstance)
     });
     await mainPage.goto(url+'paris');
-    await delay(60000 * 4)
+    await delay(60000 * 5)
 
     // Wrapping the Puppeteer browser logic in a GET request
     app.get('/ripley', function(req, res) {
@@ -134,7 +140,7 @@ const callBots = async() =>{
 app.listen(3000, function() {
   console.log('Running on port 3000.');
 });
-saveProductsFavatex()
+//saveProductsFavatex()
 //getProductsFavatex()
 //getAccessToken()
 async function funcInterval(){
@@ -153,10 +159,10 @@ async function funcInterval(){
     }else{
         hours.toString()    
     }
-    if(hours+':'+minutes=='08:27'){
+    if(hours+':'+minutes=='08:50'){
         console.log('it is '+hours+':'+minutes+' time to run!') 
         await callBots()//execute
-        await saveProductsFavatex()
+        //await saveProductsFavatex()
     }
     console.log(hours.toString() +':'+minutes.toString()) 
 }

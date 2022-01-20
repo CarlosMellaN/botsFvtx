@@ -12,6 +12,17 @@ const config = {
         enableArithAbort: false
     }
 };
+/*const config = {
+    user: process.env.USER_DB_QA,
+    password: process.env.PASS_DB_QA,
+    server: process.env.SERVER_DB_QA, 
+    database: process.env.DATABASE_QA,
+    options: {
+        trustServerCertificate: false,
+        encrypt: false,
+        enableArithAbort: false
+    }
+};*/
 async function saveProductsFavatex () {
     const products = await getListTotalProducts()
     //console.log(products)

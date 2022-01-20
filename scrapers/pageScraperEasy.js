@@ -235,6 +235,12 @@ const scraperObject = {
                 }
             }
         }
+        folder.readdir(dirEnterprise, (err, files) => {
+            files.forEach(file => {
+                console.log(file);
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/easy.xls')
+            });
+        });
     }
 }
 module.exports = scraperObject;

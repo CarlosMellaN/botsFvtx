@@ -124,20 +124,21 @@ const scraperObject = {
             }
             await page.waitForSelector('#gwt-uid-4',{delay:1000});
             await page.$eval('.v-button-btn-filter-search', el => el.click(),{delay:20000});
-            await page.waitForTimeout(25000)
+            console.log('wait 60 seconds to load data')
+            await page.waitForTimeout(60000)
             await page.$eval('#gwt-uid-7', el => el.click(),{delay:20000});
             await page.waitForTimeout(25000)
             console.log('wait for icon download')
-            //*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span
+                                            //*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span
             const elements = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span[@class="v-button-wrap"]')
             await elements[0].click()
             await page.waitForTimeout(3000)
-            //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
+            console.log('wait for button download')
             //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
             const linkDescargar = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span')
             await linkDescargar[0].click()
             await page.waitForTimeout(5000)
-            console.log('wait for popup select format')
+            //console.log('wait for popup select format')
             console.log('wait for link download')
             await page.waitForSelector('[aria-labelledby="gwt-uid-8"]',{delay:20000});
             await page.$eval('div.v-horizontallayout.v-layout.v-horizontal.v-widget > div.v-slot > div.v-link.v-widget > a', el => el.click(),{delay: 1000});
@@ -198,7 +199,8 @@ const scraperObject = {
                     }
                     await page.waitForSelector('#gwt-uid-4',{delay:1000});
                     await page.$eval('.v-button-btn-filter-search', el => el.click(),{delay:20000});
-                    await page.waitForTimeout(25000)
+                    console.log('wait 60 seconds to load data')
+                    await page.waitForTimeout(60000)
                     await page.$eval('#gwt-uid-7', el => el.click(),{delay:20000});
                     await page.waitForTimeout(25000)
                     console.log('wait for icon download')
@@ -206,7 +208,6 @@ const scraperObject = {
                     const elements = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span[@class="v-button-wrap"]')
                     await elements[0].click()
                     await page.waitForTimeout(3000)
-                    //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
                     //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
                     const linkDescargar = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span')
                     await linkDescargar[0].click()
@@ -233,6 +234,12 @@ const scraperObject = {
                 }
             }
         }
+        folder.readdir(dirEnterprise, (err, files) => {
+            files.forEach(file => {
+                console.log(file);
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/paris.xls')
+            });
+        });
     }
 }
 module.exports = scraperObject;

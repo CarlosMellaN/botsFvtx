@@ -1,9 +1,9 @@
 //https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/
 const express = require('express'); // Adding Express
 const app = express(); // Initializing Express
-const urlGetAccessToken = 'https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/'
-const client_id = '8231588529441057'
-const client_secret= 'o97kurod4Jc6vd6zqZH9m52rIzAyi2VJ'
+const urlGetAccessToken = process.env.URL_GET_ACCESS_TOKEN
+const client_id = process.env.CLIENT_ID
+const client_secret= process.env.CLIENT_SECRET
 const redirectUrl = 'https://www.favatex.com/'
 
 
