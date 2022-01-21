@@ -15,28 +15,50 @@ const scraperControllerLaPolar = require('./controllers/pageControllerLaPolar');
 const getProductsFavatex = require('./favatexCom/productFavatexWeb')
 const getAccessToken = require('./mercadolibre/apiML')
 const saveProductsFavatex = require('./favatexCom/insertProductsDB')
-
-const http = require('http');
-const url = require('url');
-const opn = require('open');
-const destroyer = require('server-destroy');
-
-const {google} = require('googleapis');
-const people = google.people('v1');
-
-
-// Wrapping the Puppeteer browser logic in a GET request
-app.get('/paris', function(req, res) {
-    res.send(`<html><body><h2>Descargando archivo Paris</h2></body></html>`)
-    let browserInstance = browserObject.startBrowser();
-    scraperControllerParis(browserInstance)
-});
-// Making Express listen on port 3000
+const getAnalyticsSite = require('./favatexCom/analyticsFavatexCom')
+const fetch = require('cross-fetch');
 
 const urlGetAccessToken = process.env.URL_GET_ACCESS_TOKEN
 const client_id = process.env.CLIENT_ID
 const client_secret= process.env.CLIENT_SECRET
 const redirectUrl = 'https://www.favatex.com/'
+async function getAccessTokenML(){
+    await fetch('https://api.mercadolibre.com/oauth/token', {
+        method:"POST",
+        headers:{
+            'accept': '*/*',
+            'content-type': 'multipart/form-data; boundary=<calculated when request is sent>',
+        },
+        data :{
+            'grant_type':'authorization_code',
+            'client_id': `${client_id}`,
+            'client_secret':`${client_secret}`,
+            'code':'TG-61e98f09804314001b6cee4a-673868683',
+            'redirect_uri':`${redirectUrl}`
+        }
+    })
+    .then((response)=>{
+        return response.json()
+    })
+    .then((resp)=>{
+        console.log(resp)
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+}
+
+getAnalyticsSite()
+
+// Wrapping the Puppeteer browser logic in a GET request
+app.get('/lider', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Lider</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerLider(browserInstance)
+});
+// Making Express listen on port 3000
+
+
 /*app.get('/mercadolibre', function (req,res) {
     var authCallback = GetBaseUrl() + '/auth/mercadolibre/callback';
     var redirectUrl = util.format('https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/',
@@ -162,7 +184,7 @@ async function funcInterval(){
     if(hours+':'+minutes=='08:50'){
         console.log('it is '+hours+':'+minutes+' time to run!') 
         await callBots()//execute
-        //await saveProductsFavatex()
+        await saveProductsFavatex()
     }
     console.log(hours.toString() +':'+minutes.toString()) 
 }

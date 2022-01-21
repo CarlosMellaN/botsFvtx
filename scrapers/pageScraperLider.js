@@ -28,7 +28,7 @@ function errorEmail(messageErrorEmail) {
 }
 let checkError = 0
 const scraperObject = {
-    url: 'https://b2b.walmartdigital.cl/s/stock/list',
+    url: 'https://corporate.walmartdigital.cl/portal_b2b_lidercl/security/identity/login',
     async scraper(browser){
         console.log('_____________________________________________________________________________________________________________________')
         console.log('-----------------------------------------------------LIDER-----------------------------------------------------------')
@@ -66,13 +66,18 @@ const scraperObject = {
             console.log(`Navigating to ${this.url}...`);
             await page.goto(this.url);
             await page.waitForTimeout(10000)
+            await page.waitForSelector('#login-form')
+            await page.$eval('#falcon_sso', el => el.click(),{delay: 100});
+            await page.goto('https://retaillink.login.wal-mart.com/authorize?clientId=42dc33ad-4825-4cb6-bf19-98e73691469b&clientType=supplier&redirectUri=https://corporate.walmartdigital.cl/portal_b2b_lidercl/security/identity/oauth&responseType=code&scope=openid%20access_auth_token%20profile_deepfetch&state=TZFI8T7DAQ&nonce=FVQ1V34E2O')
             // Wait for the required DOM to be rendered
-            await page.waitForSelector('form[name=login]');
-            await page.type('#input_0', process.env.USER_LIDER, {delay: 500})
-            await page.type('#input_1', process.env.PASS_LIDER, {delay: 500})
-            await page.$eval('.login-button', el => el.click(),{delay: 100});
-            console.log('login successful')
             await page.waitForTimeout(10000)
+            await page.waitForSelector('.main-container');
+            await page.type('[data-automation-id="uname"]', process.env.USER_LIDER, {delay: 500})
+            await page.type('[data-automation-id="pwd"]', process.env.PASS_LIDER, {delay: 500})
+            await page.$eval('[data-automation-id="loginBtn"]', el => el.click(),{delay: 100});
+            console.log('login successful')
+            await page.waitForTimeout(15000)
+            await page.goto('https://corporate.walmartdigital.cl/portal_b2b_lidercl/s/stock/list')
             await page.waitForSelector('#content', {delay: 1000});
             await page.waitForTimeout(5000)
             await page.$eval('#stock-button-download', el => el.click(), {delay: 1000});
@@ -92,9 +97,9 @@ const scraperObject = {
                 console.log(checkError)
                 checkError++
                 try {
-                    console.log(`Navigating to ${this.url}...`);
-                    await page.goto(this.url);
-                    await page.waitForTimeout(10000)
+                    console.log(`Navigating to https://corporate.walmartdigital.cl/portal_b2b_lidercl/s/stock/list...`);
+                    await page.goto('https://corporate.walmartdigital.cl/portal_b2b_lidercl/s/stock/list');
+                    //await page.waitForTimeout(10000)
                     // Wait for the required DOM to be rendered
                     //await page.waitForSelector('form[name=login]');
                     //await page.type('#input_0', process.env.USER_LIDER, {delay: 500})
@@ -125,7 +130,7 @@ const scraperObject = {
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
                 console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/lider.xls')
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/lider.csv')
             });
         });
     }

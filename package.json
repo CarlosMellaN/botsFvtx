@@ -10,19 +10,22 @@
   "author": "Carlos Mella",
   "license": "ISC",
   "dependencies": {
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "cross-fetch": "^3.1.4",
     "csv-writer": "^1.6.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "express-openid-connect": "^2.5.2",
     "googleapis": "^92.0.0",
+    "mercadolibre-nodejs-sdk": "^0.1.1",
     "mssql": "^7.3.0",
     "nodemailer": "^6.7.2",
     "oauth-1.0a": "^2.2.6",
     "puppeteer": "^13.0.1",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-recaptcha": "^3.5.0",
-    "tedious": "^14.0.0"
+    "tedious": "^14.0.0",
+    "wpapi": "^1.2.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
