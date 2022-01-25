@@ -92,7 +92,7 @@ const scraperObject = {
             await frame.$eval('#menuItem724_6', el => el.click())
             console.log('wait for link download')
             await frame.waitForTimeout(60000);
-            await frame.$eval('.displayTagexcel', el => el.click())
+            await frame.$eval('.displayTagcsv', el => el.click())
             await frame._client.send("Page.setDownloadBehavior", {
                 behavior: "allow",
                 downloadPath: path.resolve('K:/COMERCIAL/VERDE/RESPALDO STK PORTALES-MANAGER-VTA PEND/STK B2B BAJADA/2022/', dirEnterprise)
@@ -135,7 +135,7 @@ const scraperObject = {
                     await frame.$eval('#menuItem724_6', el => el.click())
                     console.log('wait for link download')
                     await frame.waitForTimeout(60000);
-                    await frame.$eval('.displayTagexcel', el => el.click())
+                    await frame.$eval('.displayTagcsv', el => el.click())
                     await frame._client.send("Page.setDownloadBehavior", {
                         behavior: "allow",
                         downloadPath: path.resolve('K:/COMERCIAL/VERDE/RESPALDO STK PORTALES-MANAGER-VTA PEND/STK B2B BAJADA/2022/', dirEnterprise)
@@ -156,7 +156,7 @@ const scraperObject = {
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
                 console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/sodimac.xls')
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/sodimac.csv')
             });
         });
     }

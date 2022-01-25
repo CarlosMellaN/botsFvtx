@@ -50,13 +50,51 @@ async function getAccessTokenML(){
 
 getAnalyticsSite()
 
-// Wrapping the Puppeteer browser logic in a GET request
+//run manually
+app.get('/abcdin', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo ABCDIN</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerABCDIN(browserInstance)
+});
+app.get('/easy', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Easy</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerEasy(browserInstance)
+});
+app.get('/falabella', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Falabella</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerFalabella(browserInstance)
+});
+app.get('/lapolar', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo La Polar</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerLaPolar(browserInstance)
+});
 app.get('/lider', function(req, res) {
     res.send(`<html><body><h2>Descargando archivo Lider</h2></body></html>`)
     let browserInstance = browserObject.startBrowser();
     scraperControllerLider(browserInstance)
 });
-// Making Express listen on port 3000
+app.get('/paris', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Paris</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerParis(browserInstance)
+});
+app.get('/ripley', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Ripley</h2></body></html>`)
+    //Start the browser and create a browser instance
+    let browserInstance = browserObject.startBrowser();
+    // Pass the browser instance to the scraper controller
+    scraperControllerRipley(browserInstance)
+    console.log('ripley bot')
+});
+app.get('/sodimac', function(req, res) {
+    res.send(`<html><body><h2>Descargando archivo Sodimac</h2></body></html>`)
+    let browserInstance = browserObject.startBrowser();
+    scraperControllerSodimac(browserInstance)
+});
+
 
 
 /*app.get('/mercadolibre', function (req,res) {
@@ -91,7 +129,7 @@ const callBots = async() =>{
         scraperControllerABCDIN(browserInstance)
     });
     await mainPage.goto(url+'abcdin');
-    await delay(60000 * 4) 
+    await delay(60000 * 5) 
 
     app.get('/easy', function(req, res) {
         res.send(`<html><body><h2>Descargando archivo Easy</h2></body></html>`)
@@ -181,10 +219,10 @@ async function funcInterval(){
     }else{
         hours.toString()    
     }
-    if(hours+':'+minutes=='08:50'){
+    if(hours+':'+minutes=='07:59'){
         console.log('it is '+hours+':'+minutes+' time to run!') 
-        await callBots()//execute
         await saveProductsFavatex()
+        await callBots()//execute
     }
     console.log(hours.toString() +':'+minutes.toString()) 
 }

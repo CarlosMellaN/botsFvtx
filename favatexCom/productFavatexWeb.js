@@ -87,13 +87,14 @@ const getProductsFavatex = async()=>{
         console.log('create folder')
         folder.mkdirSync(dir);
     }
-    let dirEnterprise = dir+'/favatexcom'
+    //CHANGE NAME!!!!!
+    let dirEnterprise = dir+'/mercadolibre'
     if(!folder.existsSync(dirEnterprise)){
         console.log('create folder enterprise')
         folder.mkdirSync(dirEnterprise);
     }
     const csvWriter = createCsvWriter({
-        path: dirEnterprise+'/favatexcom'+day+month+hours+minutes+'.csv',
+        path: dirEnterprise+'/mercadolibre'+day+month+hours+minutes+'.csv',
         header: [
             {id: 'sku', title: 'SKU'},
             {id: 'quantity', title: 'QUANTITY'},

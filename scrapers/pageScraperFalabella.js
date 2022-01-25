@@ -92,7 +92,7 @@ const scraperObject = {
             await frame.waitForTimeout(60000);
             await frame.$eval('[onclick="javascript:submitFiltro();"]', el => el.click(), {delay: 10});
             await frame.waitForTimeout(60000);
-            await frame.$eval('.displayTagexcel', el => el.click())
+            await frame.$eval('.displayTagcsv', el => el.click())
             await frame._client.send("Page.setDownloadBehavior", {
                 behavior: "allow",
                 downloadPath: path.resolve('K:/COMERCIAL/VERDE/RESPALDO STK PORTALES-MANAGER-VTA PEND/STK B2B BAJADA/2022/', dirEnterprise)
@@ -140,7 +140,7 @@ const scraperObject = {
                     await frame.waitForTimeout(60000);
                     await frame.$eval('[onclick="javascript:submitFiltro();"]', el => el.click(), {delay: 10});
                     await frame.waitForTimeout(60000);
-                    await frame.$eval('.displayTagexcel', el => el.click())
+                    await frame.$eval('.displayTagcsv', el => el.click())
                     await frame._client.send("Page.setDownloadBehavior", {
                         behavior: "allow",
                         downloadPath: path.resolve('K:/COMERCIAL/VERDE/RESPALDO STK PORTALES-MANAGER-VTA PEND/STK B2B BAJADA/2022/', dirEnterprise)
@@ -161,7 +161,7 @@ const scraperObject = {
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
                 console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/falabella.xls')
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/falabella.csv')
             });
         });
     }

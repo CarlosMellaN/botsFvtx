@@ -128,10 +128,10 @@ const scraperObject = {
             //*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span
             const elements = await page.$x('//*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span[@class="v-button-wrap"]')
             await elements[0].click() 
-            console.log('wait for popup select format 10 seconds')
-            await page.waitForTimeout(10000)
+            console.log('wait for popup select format 60 seconds')
+            await page.waitForTimeout(60000)
             await page.waitForSelector('div.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle > div.popupContent',{delay:20000});
-            await page.$eval('#gwt-uid-42', el => el.click(),{delay: 1000});
+            await page.$eval('#gwt-uid-43', el => el.click(),{delay: 1000});
             const [seleccionarLink] = await page.$x("//span[contains(., 'Seleccionar')]");
             seleccionarLink.click();
             console.log('wait for link download 35 seconds')
@@ -196,10 +196,10 @@ const scraperObject = {
                     //*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span
                     const elements = await page.$x('//*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span[@class="v-button-wrap"]')
                     await elements[0].click() 
-                    console.log('wait for popup select format 10 seconds')
-                    await page.waitForTimeout(10000)
+                    console.log('wait for popup select format 60 seconds')
+                    await page.waitForTimeout(60000)
                     await page.waitForSelector('div.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle > div.popupContent',{delay:20000});
-                    await page.$eval('#gwt-uid-42', el => el.click(),{delay: 1000});
+                    await page.$eval('#gwt-uid-43', el => el.click(),{delay: 1000});
                     const [seleccionarLink] = await page.$x("//span[contains(., 'Seleccionar')]");
                     seleccionarLink.click();
                     console.log('wait for link download 35 seconds')
@@ -227,7 +227,7 @@ const scraperObject = {
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
                 console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/abcdin.xls')
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/abcdin.csv')
             });
         });
     }
