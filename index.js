@@ -15,6 +15,7 @@ const scraperControllerLaPolar = require('./controllers/pageControllerLaPolar');
 const getProductsFavatex = require('./favatexCom/productFavatexWeb')
 const getAccessToken = require('./mercadolibre/apiML')
 const saveProductsFavatex = require('./favatexCom/insertProductsDB')
+const saveOrdersFavatex = require('./favatexCom/insertOrderProducts')
 const getAnalyticsSite = require('./favatexCom/analyticsFavatexCom')
 const fetch = require('cross-fetch');
 
@@ -47,8 +48,6 @@ async function getAccessTokenML(){
         console.log(error)
     })
 }
-
-getAnalyticsSite()
 
 //run manually
 app.get('/abcdin', function(req, res) {
@@ -201,7 +200,7 @@ app.listen(3000, function() {
   console.log('Running on port 3000.');
 });
 //saveProductsFavatex()
-//getProductsFavatex()
+//saveOrdersFavatex()
 //getAccessToken()
 async function funcInterval(){
     var d = new Date();
@@ -219,9 +218,10 @@ async function funcInterval(){
     }else{
         hours.toString()    
     }
-    if(hours+':'+minutes=='07:59'){
+    if(hours+':'+minutes=='07:44'){
         console.log('it is '+hours+':'+minutes+' time to run!') 
         await saveProductsFavatex()
+        await saveOrdersFavatex()
         await callBots()//execute
     }
     console.log(hours.toString() +':'+minutes.toString()) 

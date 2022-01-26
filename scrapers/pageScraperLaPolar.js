@@ -126,7 +126,7 @@ const scraperObject = {
             await page.waitForTimeout(5000)
             console.log('wait for popup select format')
             await page.waitForSelector('div.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle > div.popupContent',{delay:20000});
-            await page.$eval('#gwt-uid-7', el => el.click(),{delay: 1000});
+            await page.$eval('#gwt-uid-8', el => el.click(),{delay: 1000});
             const [seleccionarLink] = await page.$x("//span[contains(., 'Seleccionar')]");
             seleccionarLink.click();
             await page.waitForTimeout(10000)
@@ -209,7 +209,7 @@ const scraperObject = {
                     await page.waitForTimeout(5000)
                     console.log('wait for popup select format')
                     await page.waitForSelector('div.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle > div.popupContent',{delay:20000});
-                    await page.$eval('#gwt-uid-7', el => el.click(),{delay: 1000});
+                    await page.$eval('#gwt-uid-8', el => el.click(),{delay: 1000});
                     const [seleccionarLink] = await page.$x("//span[contains(., 'Seleccionar')]");
                     seleccionarLink.click();
                     await page.waitForTimeout(10000)
@@ -236,7 +236,7 @@ const scraperObject = {
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
                 console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/lapolar.csv')
+                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/lapolar.xls')
             });
         });
     }

@@ -46,7 +46,7 @@ const getProductsFavatex = async()=>{
     }
     let url = 'https://www.favatex.com/wp-json/wc/v3/products?per_page=1&page='
     let numberPage = 0;
-    let products = []
+    let listProducts = []
     let sku
     let nameProduct
     let stockQuantity
@@ -154,7 +154,7 @@ const getProductsFavatex = async()=>{
                         /*.then(() => {
                             console.log( '...Done');
                         });*/
-                        products.push({ 
+                        listProducts.push({ 
                             sku: element.sku, 
                             quantity: element.stock_quantity, 
                             name: nameProduct, 
@@ -175,6 +175,6 @@ const getProductsFavatex = async()=>{
     }
     await getListTotalProducts() 
     console.log('products list done!') 
-    return products     
+    return listProducts     
 }
 module.exports = getProductsFavatex;
