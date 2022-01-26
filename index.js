@@ -19,35 +19,7 @@ const saveOrdersFavatex = require('./favatexCom/insertOrderProducts')
 const getAnalyticsSite = require('./favatexCom/analyticsFavatexCom')
 const fetch = require('cross-fetch');
 
-const urlGetAccessToken = process.env.URL_GET_ACCESS_TOKEN
-const client_id = process.env.CLIENT_ID
-const client_secret= process.env.CLIENT_SECRET
-const redirectUrl = 'https://www.favatex.com/'
-async function getAccessTokenML(){
-    await fetch('https://api.mercadolibre.com/oauth/token', {
-        method:"POST",
-        headers:{
-            'accept': '*/*',
-            'content-type': 'multipart/form-data; boundary=<calculated when request is sent>',
-        },
-        data :{
-            'grant_type':'authorization_code',
-            'client_id': `${client_id}`,
-            'client_secret':`${client_secret}`,
-            'code':'TG-61e98f09804314001b6cee4a-673868683',
-            'redirect_uri':`${redirectUrl}`
-        }
-    })
-    .then((response)=>{
-        return response.json()
-    })
-    .then((resp)=>{
-        console.log(resp)
-    })
-    .catch(error=>{
-        console.log(error)
-    })
-}
+//getAccessToken()
 
 //run manually
 app.get('/abcdin', function(req, res) {
@@ -94,15 +66,12 @@ app.get('/sodimac', function(req, res) {
     scraperControllerSodimac(browserInstance)
 });
 
-
-
 /*app.get('/mercadolibre', function (req,res) {
     var authCallback = GetBaseUrl() + '/auth/mercadolibre/callback';
     var redirectUrl = util.format('https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/',
     config.clientId, authCallback);
     res.redirect(redirectUrl);
 });*/
-
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 const callBots = async() =>{
