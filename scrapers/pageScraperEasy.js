@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer')
-
+const path = require('path');
+let folder = require('fs');
 function errorEmail(messageErrorEmail) {
     // Definimos el transporter
     var transporter = nodemailer.createTransport({
@@ -34,9 +35,7 @@ const scraperObject = {
         console.log('_____________________________________________________________________________________________________________________')
         console.log('-------------------------------------------------------EASY----------------------------------------------------------')
         console.log('_____________________________________________________________________________________________________________________')
-        const path = require('path');
         let page = await browser.newPage();
-        let folder = require('fs');
         let date = new Date();
         let day = date.getDate();
         if(day < 10){
@@ -237,8 +236,15 @@ const scraperObject = {
         }
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
-                console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/easy.xls')
+                //console.log(file);
+                let fileExtension = path.extname(file);
+                //console.log(fileExtension)
+                if(fileExtension!='.xls'){
+                    messageErrorEmail = 'La extension del archivo no es la correcta'
+                    errorEmail(messageErrorEmail);
+                }else{
+                    folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/easy.xls')
+                }
             });
         });
     }

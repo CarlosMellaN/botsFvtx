@@ -32,6 +32,7 @@ async function saveProductsFavatex () {
         let quantity = parseInt(product.quantity)
         let regularPrice = parseInt(product.regularPrice)
         let salePrice = parseInt(product.salePrice)
+        let hour = product.hour; 
         if(isNaN(salePrice)){
             salePrice=0
         }
@@ -52,7 +53,8 @@ async function saveProductsFavatex () {
                 var request = new sql.Request();   
                 // query to the database and get the records
                 request.input('productName', sql.VarChar, productName);
-                request.query("INSERT INTO dbo.com_stock_web (SKU, DESCRIPCION, STOCK, PRECIO, PRECIO_OF, fecha) VALUES ("+sku+", @productName , "+quantity+", "+regularPrice+", "+salePrice+", SYSDATETIME())", function (err, recordset) {
+                request.input('hour',sql.VarChar, hour);
+                request.query("INSERT INTO dbo.com_stock_web (SKU, DESCRIPCION, STOCK, PRECIO, PRECIO_OF, fecha, HORA) VALUES ("+sku+", @productName , "+quantity+", "+regularPrice+", "+salePrice+", SYSDATETIME(), @hour)", function (err, recordset) {
                     if (err){
                         console.log(err)
                     }

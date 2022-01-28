@@ -20,8 +20,10 @@ const getAnalyticsSite = require('./favatexCom/analyticsFavatexCom')
 const fetch = require('cross-fetch');
 
 //getAccessToken()
-
 //run manually
+app.get('/callbots', (req,res) =>{
+    callBots()
+});
 app.get('/abcdin', function(req, res) {
     res.send(`<html><body><h2>Descargando archivo ABCDIN</h2></body></html>`)
     let browserInstance = browserObject.startBrowser();
@@ -187,11 +189,15 @@ async function funcInterval(){
     }else{
         hours.toString()    
     }
-    if(hours+':'+minutes=='07:44'){
+    if(hours+':'+minutes=='07:00'){
         console.log('it is '+hours+':'+minutes+' time to run!') 
         await saveProductsFavatex()
         await saveOrdersFavatex()
         await callBots()//execute
+    }
+    if(hours+':'+minutes=='15:00'){
+        console.log('it is '+hours+':'+minutes+' time to run! for Don Manuel') 
+        await saveProductsFavatex()
     }
     console.log(hours.toString() +':'+minutes.toString()) 
 }

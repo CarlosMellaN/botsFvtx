@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer')
+const path = require('path');
+let folder = require('fs');
 function errorEmail(messageErrorEmail) {
     // Definimos el transporter
     var transporter = nodemailer.createTransport({
@@ -34,9 +36,7 @@ const scraperObject = {
         console.log('_____________________________________________________________________________________________________________________')
         console.log('-----------------------------------------------------PARIS-----------------------------------------------------------')
         console.log('_____________________________________________________________________________________________________________________')
-        const path = require('path');
         let page = await browser.newPage();
-        let folder = require('fs');
         let date = new Date();
         let day = date.getDate();
         if(day < 10){
@@ -140,7 +140,7 @@ const scraperObject = {
             await page.waitForTimeout(5000)
             //console.log('wait for popup select format')
             console.log('wait for link download')
-            await page.waitForSelector('[aria-labelledby="gwt-uid-8"]',{delay:20000});
+            await page.waitForSelector('[aria-labelledby="gwt-uid-9"]',{delay:20000});
             await page.$eval('div.v-horizontallayout.v-layout.v-horizontal.v-widget > div.v-slot > div.v-link.v-widget > a', el => el.click(),{delay: 1000});
             //K:\COMERCIAL\VERDE\RESPALDO STK PORTALES-MANAGER-VTA PEND\STK B2B BAJADA\2022
             await page._client.send("Page.setDownloadBehavior", {
@@ -214,13 +214,14 @@ const scraperObject = {
                     await page.waitForTimeout(5000)
                     console.log('wait for popup select format')
                     console.log('wait for link download')
-                    await page.waitForSelector('[aria-labelledby="gwt-uid-8"]',{delay:20000});
+                    await page.waitForSelector('[aria-labelledby="gwt-uid-9"]',{delay:20000});
                     await page.$eval('div.v-horizontallayout.v-layout.v-horizontal.v-widget > div.v-slot > div.v-link.v-widget > a', el => el.click(),{delay: 1000});
                     //K:\COMERCIAL\VERDE\RESPALDO STK PORTALES-MANAGER-VTA PEND\STK B2B BAJADA\2022
                     await page._client.send("Page.setDownloadBehavior", {
                         behavior: "allow",
                         downloadPath: path.resolve('K:/COMERCIAL/VERDE/RESPALDO STK PORTALES-MANAGER-VTA PEND/STK B2B BAJADA/2022/', dirEnterprise)
                     })
+                    
                     await page.waitForTimeout(30000)
                     console.log('download successful \nclose browser')
                     await page.close();
@@ -236,8 +237,15 @@ const scraperObject = {
         }
         folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
-                console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/paris.xls')
+                //console.log(file);
+                let fileExtension = path.extname(file);
+                //console.log(fileExtension)
+                if(fileExtension!='.xls'){
+                    messageErrorEmail = 'La extension del archivo no es la correcta'
+                    errorEmail(messageErrorEmail);
+                }else{
+                    folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/paris.xls')
+                }
             });
         });
     }

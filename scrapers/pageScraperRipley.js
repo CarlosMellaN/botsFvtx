@@ -164,12 +164,20 @@ const scraperObject = {
                 }
             }
         }
-        folder.readdir(dirEnterprise, (err, files) => {
+        folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/ripley.csv')
+        /*folder.readdir(dirEnterprise, (err, files) => {
             files.forEach(file => {
-                console.log(file);
-                folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/ripley.csv')
+                //console.log(file);
+                let fileExtension = path.extname(file);
+                //console.log(fileExtension)
+                if(fileExtension!='.csv'){
+                    messageErrorEmail = 'La extension del archivo no es la correcta'
+                    errorEmail(messageErrorEmail);
+                }else{
+                    folder.renameSync(dirEnterprise+'/'+file, dirEnterprise+'/ripley.csv')
+                }
             });
-        });
+        });*/
     }
 }
 module.exports = scraperObject;
