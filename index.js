@@ -17,7 +17,10 @@ const getAccessToken = require('./mercadolibre/apiML')
 const saveProductsFavatex = require('./favatexCom/insertProductsDB')
 const saveOrdersFavatex = require('./favatexCom/insertOrderProducts')
 const getAnalyticsSite = require('./favatexCom/analyticsFavatexCom')
-const fetch = require('cross-fetch');
+
+app.get('/auth', (req, res) => {
+    res.send('hola')
+});
 
 //getAccessToken()
 //run manually
@@ -68,13 +71,6 @@ app.get('/sodimac', function(req, res) {
     scraperControllerSodimac(browserInstance)
 });
 
-/*app.get('/mercadolibre', function (req,res) {
-    var authCallback = GetBaseUrl() + '/auth/mercadolibre/callback';
-    var redirectUrl = util.format('https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/',
-    config.clientId, authCallback);
-    res.redirect(redirectUrl);
-});*/
-
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 const callBots = async() =>{
     app.get('/', (req, res) => {
@@ -113,7 +109,7 @@ const callBots = async() =>{
         res.send(`<html><body><h2>Descargando archivo Falabella</h2></body></html>`)
         let browserInstance = browserObject.startBrowser();
         scraperControllerFalabella(browserInstance)
-    });
+    })
     await mainPage.goto(url+'falabella');
     await delay(60000 * 4) 
 
@@ -148,7 +144,6 @@ const callBots = async() =>{
         let browserInstance = browserObject.startBrowser();
         // Pass the browser instance to the scraper controller
         scraperControllerRipley(browserInstance)
-        console.log('ripley bot')
     });
     await mainPage.goto(url+'ripley');
     await delay(60000 * 3) /// waiting 40 second.

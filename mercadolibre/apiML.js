@@ -1,62 +1,66 @@
-//https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/
 const express = require('express'); // Adding Express
 const app = express(); // Initializing Express
-const puppeteer = require('puppeteer')
+const fetch = require('cross-fetch');
 const urlGetAccessToken = process.env.URL_GET_ACCESS_TOKEN
 const client_id = process.env.CLIENT_ID
 const client_secret= process.env.CLIENT_SECRET
 const redirectUrl = 'https://www.favatex.com/'
-    
-const getAccessToken = async()=>{
-    let mlBroser;
-    mlBroser = await puppeteer.launch({
-        headless: false,
-        slowMo: 10,
-        args: ["--disable-setuid-sandbox"],
-        'ignoreHTTPSErrors': true
-    });
-    let page = await mlBroser.newPage();
-    await page.setUserAgent('5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36');
-    await page.setViewport({
-        width: 1920 + Math.floor(Math.random() * 100),
-        height: 3000 + Math.floor(Math.random() * 100),
-        deviceScaleFactor: 1,
-        hasTouch: false,
-        isLandscape: false,
-        isMobile: false,
-    });
-    await page.goto(urlGetAccessToken);
-    await page.waitForSelector('#login_user_form',{delay:2000});
-    await page.type('#user_id', process.env.USER_ML, {delay: 1000})
-    
-    //console.log('wait for solve captcha')
-    await page.$eval('.andes-button.andes-button--large.andes-button--loud.andes-button--full-width', el => el.click())
-    await page.waitForTimeout(10000);
-    await page.waitForSelector('iframe[src*="recaptcha/"]');
-    await page.$eval('.andes-button.andes-button--large.andes-button--loud.andes-button--full-width', el => el.click())
-    let currentUrl = page.url()
-    console.log(currentUrl);
-    /*await page.goto(currentUrl)
-    await page.waitForSelector('#login_user_form',{delay:2000});
-    await page.waitForTimeout(10000); 
-    //await page.type('#user_id', process.env.USER_ML, {delay: 100})
-    await page.waitForSelector('iframe[src*="recaptcha/"]');
-    console.log('wait for solve captcha')
-    await page.$eval('.andes-button.andes-button--large.andes-button--loud.andes-button--full-width', el => el.click())
-    //await page.goto('https://www.mercadolibre.com/jms/mlc/lgz/msl/login/H4sIAAAAAAAEAzWNQQ6DMAwE_7LnCO459iORAQeiOgQ5pmlV8fcqqjiudmf2Cylr2oN9DobHwpFOMTgcQhaL5pAWeGSBQ03Gd5z7hJQyG2uF_3bPysuDY9FuiiSV4UCnbSFKafD_KzikGvhtrDtJaDy9Evf2JtYCj83sqH4cW2tDZp1pKZIm5WEWXA6RqgVTmp_wpidfP2Z_u0jIAAAA/enter-pass');
-    //await page.type('#password', process.env.PASS_ML, {delay: 200})
-    //await page.$eval('#action-complete', el => el.click())
-    //await mainPage.waitForTimeout(5000);
-    //await mainPage.reload(url);*/
 
-    
-    app.get('/auth', (req, res) => {
-        res.redirect(
-            'https://auth.mercadolibre.com/authorization?response_type=code&client_id=8231588529441057&redirect_uri=https://www.favatex.com/',
-        );
+const getAccessToken = async()=>{
+
+    /*var meli = require('mercadolibre-nodejs-sdk');
+    let apiInstance = new meli.OAuth20Api();
+    let apiInstance = new meli.RestClientApi();
+    let resource = "resource_example"; // String | 
+    let accessToken = "accessToken_example"; // String | 
+    apiInstance.resourceGet(resource, accessToken, (error, data, response) => {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log('API called successfully.');
+    }
     });
-    
+
+    // Get the Auth URL, for example, country Argentina -> 1
+    const authUrl = 'https://auth.mercadolibre.com/'
+    // Auth URLs Options by country
+    // [0]  - https://api.mercadolibre.com (default API endpoint)
+    // [1]  - https://auth.mercadolibre.com.ar
+    // [2]  - https://auth.mercadolivre.com.br
+    // [3]  - https://auth.mercadolibre.com.co
+    // [4]  - https://auth.mercadolibre.com.mx
+    // [5]  - https://auth.mercadolibre.com.uy
+    // [6]  - https://auth.mercadolibre.cl
+    // [7]  - https://auth.mercadolibre.com.cr
+    // [8]  - https://auth.mercadolibre.com.ec
+    // [9]  - https://auth.mercadolibre.com.ve
+    // [10] - https://auth.mercadolibre.com.pa
+    // [11] - https://auth.mercadolibre.com.pe
+    // [12] - https://auth.mercadolibre.com.pt
+    // [13] - https://auth.mercadolibre.com.do
+
+    // Use the correct auth URL
+    apiInstance.apiClient.basePath = authUrl;
+
+    let responseType = 'code'; // String |
+    let clientId = client_id; // String |
+    let redirectUri = redirectUrl; // String |
+    apiInstance.auth(
+    responseType,
+    clientId,
+    redirectUri,
+    (error, data, response) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log('API called successfully.');
+                console.log(response)
+            }
+        }
+    );*/
+
     async function getAccessTokenML(){
+        console.log('ml')
         await fetch('https://api.mercadolibre.com/oauth/token', {
             method:"POST",
             headers:{
@@ -81,5 +85,6 @@ const getAccessToken = async()=>{
             console.log(error)
         })
     }
+    getAccessTokenML()
 }
 module.exports = getAccessToken;

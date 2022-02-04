@@ -147,7 +147,7 @@ const scraperObject = {
             checkError++
             if(checkError==1){
                 try {
-                    console.log(`Navigating to ${this.url}...`);
+                    /*console.log(`Navigating to ${this.url}...`);
                     await page.goto(this.url);
                     // Wait for the required DOM to be rendered
                     await page.setUserAgent('5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36');
@@ -186,7 +186,7 @@ const scraperObject = {
                         }
                     }
                     await page.$eval('#kc-login', el => el.click())
-                    console.log('login successful')
+                    console.log('login successful')*/
                     await page.goto('https://b2b.lapolar.cl/BBRe-commerce/main');
                     //await page.waitForSelector('.popupContent')
                     //await page.$eval('.v-window-closebox',el => el.click(),{delay:1000})
@@ -227,7 +227,7 @@ const scraperObject = {
                 } catch (error) {
                     console.log('segunda vez que se ejecuta '+checkError)
                     messageErrorEmail = 'Segundo intento y tengo este error '+error+'\na revisar'
-                    await errorEmail(messageErrorEmail);
+                    //await errorEmail(messageErrorEmail);
                     await page.close();
                     await browser.close();
                 }

@@ -4,8 +4,8 @@
   "description": "bot scrapping b2b ripley",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js",
-    "dev": "nodemon index"
+    "test": "nodemon index",
+    "dev": "node index.js"
   },
   "author": "Carlos Mella",
   "license": "ISC",

@@ -130,14 +130,16 @@ const scraperObject = {
             await page.waitForTimeout(25000)
             console.log('wait for icon download')
                                             //*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span
+                                            //*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span
             const elements = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[3]/div/span[@class="v-button-wrap"]')
             await elements[0].click()
             await page.waitForTimeout(3000)
             console.log('wait for button download')
             //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
+            //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
             const linkDescargar = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span')
             await linkDescargar[0].click()
-            await page.waitForTimeout(5000)
+            await page.waitForTimeout(10000)
             //console.log('wait for popup select format')
             console.log('wait for link download')
             await page.waitForSelector('[aria-labelledby="gwt-uid-9"]',{delay:20000});
@@ -211,7 +213,7 @@ const scraperObject = {
                     //*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span
                     const linkDescargar = await page.$x('//*[@id="ParisCLBBRecommercemain-957129787-overlays"]/div[2]/div/div/div/div/span')
                     await linkDescargar[0].click()
-                    await page.waitForTimeout(5000)
+                    await page.waitForTimeout(10000)
                     console.log('wait for popup select format')
                     console.log('wait for link download')
                     await page.waitForSelector('[aria-labelledby="gwt-uid-9"]',{delay:20000});

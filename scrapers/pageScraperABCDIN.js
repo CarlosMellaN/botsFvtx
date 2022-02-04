@@ -124,8 +124,7 @@ const scraperObject = {
             await page.$eval('#gwt-uid-6', el => el.click(),{delay:20000});
             console.log('wait for load data 20 seconds')
             await page.waitForTimeout(20000)
-            //*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div[1]/div/span
-            //*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span
+                                            //*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span
             const elements = await page.$x('//*[@id="ABCDinBBRecommercemain-1676628978"]/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div[3]/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div[3]/div/div[1]/div/span[@class="v-button-wrap"]')
             await elements[0].click() 
             console.log('wait for popup select format 60 seconds')
@@ -204,6 +203,7 @@ const scraperObject = {
                     seleccionarLink.click();
                     console.log('wait for link download 35 seconds')
                     await page.waitForTimeout(35000)
+                    
                     await page.waitForSelector('.v-window.v-widget.v-has-width.v-has-height.titleWindowsStyle.v-window-titleWindowsStyle',{delay:20000});
                     await page.$eval('div.v-horizontallayout.v-layout.v-horizontal.v-widget > div.v-slot > div.v-link.v-widget > a', el => el.click(),{delay: 1000});
                     await page._client.send("Page.setDownloadBehavior", {
