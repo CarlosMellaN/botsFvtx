@@ -95,7 +95,7 @@ const callBots = async() =>{
         scraperControllerABCDIN(browserInstance)
     });
     await mainPage.goto(url+'abcdin');
-    await delay(60000 * 5) 
+    await delay(60000 * 7) 
 
     app.get('/easy', function(req, res) {
         res.send(`<html><body><h2>Descargando archivo Easy</h2></body></html>`)

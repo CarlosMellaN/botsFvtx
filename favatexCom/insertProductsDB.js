@@ -27,6 +27,7 @@ async function saveProductsFavatex () {
     const products = await getListTotalProducts()
     //console.log(products)
     for (const product of products) {
+        let idProducto = product.id
         let productName = product.name.toString();
         let sku = product.sku;
         let quantity = parseInt(product.quantity)
@@ -54,7 +55,7 @@ async function saveProductsFavatex () {
                 // query to the database and get the records
                 request.input('productName', sql.VarChar, productName);
                 request.input('hour',sql.VarChar, hour);
-                request.query("INSERT INTO dbo.com_stock_web (SKU, DESCRIPCION, STOCK, PRECIO, PRECIO_OF, fecha, HORA) VALUES ("+sku+", @productName , "+quantity+", "+regularPrice+", "+salePrice+", SYSDATETIME(), @hour)", function (err, recordset) {
+                request.query("INSERT INTO dbo.com_stock_web (SKU, DESCRIPCION, STOCK, PRECIO, PRECIO_OF, fecha, HORA, ID_PRODUCTO) VALUES ("+sku+", @productName , "+quantity+", "+regularPrice+", "+salePrice+", SYSDATETIME(), @hour, "+idProducto+")", function (err, recordset) {
                     if (err){
                         console.log(err)
                     }

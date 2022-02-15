@@ -17,11 +17,12 @@ yesterday = new Date(yesterday.getTime() - (offset*60*1000))
 //console.log(yesterday.toISOString().split('T')[0])
 yesterday = yesterday.toISOString().split('T')[0]
 let endpoint = 'orders?orderby=date&order=desc&after='+yesterday+'T00%3A00%3A00&before='+yesterday+'T23%3A59%3A59&page=1&per_page=100&interval=day'
+//console.log(endpoint)
 const getAnalyticsSite = async () =>{
     let i = 1
     let totalPages
     //get total pages
-    //await WooCommerce.get('orders?orderby=date&order=desc&after=2022-01-28T00%3A00%3A00&before=2022-01-29T23%3A59%3A59&page=1&per_page=100&interval=day')
+    //await WooCommerce.get('orders?orderby=date&order=desc&after=2022-02-04T00%3A00%3A00&before=2022-02-05T23%3A59%3A59&page=1&per_page=100&interval=day')
     await WooCommerce.get(endpoint)
     .then((response)=>{
         totalPages = response.headers['x-wp-totalpages']
@@ -36,6 +37,7 @@ const getAnalyticsSite = async () =>{
         //'orders?orderby=date&order=desc&after=2022-01-25T00%3A00%3A00&before=2022-01-25T23%3A59%3A59&page=1&per_page=100&interval=day'
         //only for data of time ago
         let endpointPaginated = 'orders?orderby=date&order=desc&after='+yesterday+'T00%3A00%3A00&before='+yesterday+'T23%3A59%3A59&page='+i+'&per_page=100&interval=day'
+        console.log(endpointPaginated)
         await WooCommerce.get(endpointPaginated)
         //WooCommerce.get("orders")
         .then((response) => {

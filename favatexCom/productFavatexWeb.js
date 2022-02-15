@@ -155,6 +155,7 @@ const getProductsFavatex = async()=>{
                             console.log( '...Done');
                         });*/
                         listProducts.push({ 
+                            id: element.id,
                             sku: element.sku, 
                             quantity: element.stock_quantity, 
                             name: nameProduct, 
